@@ -147,7 +147,18 @@ def triangle_calc():
 
 
 # Initial variables
+shape = [
+    ["square", "s"],
+    ["circle", "c"],
+    ["rectangle", "r"],
+    ["parallelogram", "p"],
+    ["triangle", "t"]
+]
 
+yes_no = [
+    ["yes", "y"],
+    ["no", "n"]
+]
 
 valid = False
 while valid is False:
