@@ -153,6 +153,7 @@ valid = False
 while valid is False:
     try:
         question = input("What shape do you want to calculate?: ").lower()
+
         if question == "square":
             square = square_calc()
             break

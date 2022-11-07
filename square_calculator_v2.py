@@ -1,6 +1,19 @@
 import math
-from fractions import Fraction
 # Function to calculate the area or perimeter of a square, circle, rectangle, parallelogram and triangle
+
+
+def string_check(choice, options):
+    for var_list in options:
+        if choice in var_list:
+            chosen = var_list[0].title()
+            is_valid = "yes"
+            break
+        else:
+            is_valid = "no"
+    if is_valid == "yes":
+        return chosen
+    else:
+        return "invalid choice"
 
 
 def square_calc():
@@ -105,14 +118,14 @@ def triangle_calc():
             #
                     # This section uses Pythagoras theorem as there are 2 sides and the user needs the 3rd side
                     if question3 == "yes":
-                        hypotenuse = input("What is the length of the hypotenuse in cm?: ")
-                        opposite = input("What is the length of the opposite in cm?: ")
+                        hypotenuse = int(input("What is the length of the hypotenuse in cm?: "))
+                        opposite = int(input("What is the length of the opposite in cm?: "))
                         adjacent = (hypotenuse**2) - (opposite**2)
                         answer = math.sqrt(adjacent)
                         print("The length of the adjacent is {} cm".format(answer))
                     else:
-                        opposite = input("What is the length of the opposite in cm?: ")
-                        adjacent = input("What is the length of the adjacent in cm?: ")
+                        opposite = int(input("What is the length of the opposite in cm?: "))
+                        adjacent = int(input("What is the length of the adjacent in cm?: "))
                         hypotenuse = (opposite**2) + (adjacent**2)
                         answer = math.sqrt(hypotenuse)
                         print("The length of the hypotenuse is {} cm".format(answer))
@@ -147,6 +160,7 @@ def triangle_calc():
 
 
 # Initial variables
+number_regex = "^[1-9]"
 shape = [
     ["square", "s"],
     ["circle", "c"],
@@ -160,27 +174,52 @@ yes_no = [
     ["no", "n"]
 ]
 
-valid = False
-while valid is False:
-    try:
-        question = input("What shape do you want to calculate?: ").lower()
-        if question == "square":
+shape_valid = "invalid choice"
+while shape_valid == "invalid choice":
+    question = input("Do you want to calculate a shape?: ").lower()
+    shape_valid = string_check(question, yes_no)
+
+if shape_valid == "Yes":
+    shape_choice = ""
+    while shape_choice != "square" or "triangle" or "parallelogram" or "circle" or "rectangle":
+        shape_choice = input("What shape would you like to calculate? There is: \n"
+                             "Square \n"
+                             "Triangle \n"
+                             "Circle \n"
+                             "Rectangle \n"
+                             "Parallelogram \n"
+                             "Type Here: ").lower()
+        print("Shape selected: ", shape_choice)
+        if shape_choice == "square":
             square = square_calc()
             break
-        elif question == "circle":
-            circle = circle_calc()
-            break
-        elif question == "rectangle":
+        if shape_choice == "rectangle":
             rectangle = rectangle_calc()
-            break
-        elif question == "parallelogram":
+        if shape_choice == "circle":
+            circle = circle_calc()
+        if shape_choice == "parallelogram":
             parallelogram = parallelogram_calc()
-        elif question == "triangle":
+        if shape_choice == "triangle":
             triangle = triangle_calc()
-        else:
-            print("Please enter either square, circle, rectangle or parallelogram")
-    except ValueError:
-        print()
+
+        shape_choice = shape_choice.strip()
+
+        shape_choice = string_check(shape_choice, shape)
+
+# question == "square":
+
+# question == "circle":
+# circle = circle_calc()
+# break
+# question == "rectangle":
+# rectangle = rectangle_calc()
+# break
+# question == "parallelogram":
+# parallelogram = parallelogram_calc()
+# question == "triangle":
+# triangle = triangle_calc()
+
+# print("Please enter either square, circle, rectangle or parallelogram")
 
 
 # Square calculations:
