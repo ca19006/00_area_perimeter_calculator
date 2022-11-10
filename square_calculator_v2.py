@@ -20,89 +20,59 @@ def square_calc():
     valid = False
     while valid is False:
         try:
-            question = input("Would you like the area or perimeter?: ").lower()
-            if question == "area":
-                side = float(input("What is the length of one side in cm?: "))
-                answer = side * side
-                print("The area of your square is {} cm".format(answer))
-                return answer
-            elif question == "perimeter":
-                side = float(input("What is the length of one side in cm?: "))
-                answer = side * 4
-                print("The perimeter of your square is {} cm".format(answer))
-                return answer
-            else:
-                print("Please enter either area or perimeter")
+            side = float(input("What is the length of one side in cm?: "))
+            area = side * 2
+            perimeter = side * 4
+            print("The area of your square is {} cm".format(area))
+            print("The perimeter of your square is {} cm".format(perimeter))
+            return area and perimeter
         except ValueError:
-            print()
+            print("Please enter a number")
 
 
 def circle_calc():
     valid = False
     while valid is False:
         try:
-            question = input("Are you trying to find the circumference or area?: ").lower()
-            decimal_place = int(input("How many decimal places do you want?: "))
-            if question == "area":
-                radius = float(input("What is the radius of your circle in cm?: "))
-                answer = 2 * math.pi * radius
-                print("The area of your circle is {:.{}f}".format(answer, decimal_place))
-                return answer
-            elif question == "circumference":
-                radius = float(input("What is the radius of your circle in cm?: "))
-                answer = math.pi * radius ** 2
-                print("The circumference of your circle is {:.{}f} cm".format(answer, decimal_place))
-                return answer
-            else:
-                print("Please enter either area or circumference")
+            decimal = int(input("How many decimal places do you want?: "))
+            radius = float(input("Whats the radius of your circle in cm?: "))
+            circumference = 2 * math.pi * radius
+            c_area = math.pi * radius ** 2
+            print("The area of your circle is {:.{}f} cm".format(c_area, decimal))
+            print("The circumference of your circle is {:.{}f}".format(circumference, decimal))
+            return c_area and circumference
         except ValueError:
-            print()
+            print("Please enter a number")
 
 
 def rectangle_calc():
     valid = False
     while valid is False:
         try:
-            s_area_perimeter = input("Do you want to find the area or perimeter?: ").lower()
-            if s_area_perimeter == "area":
-                s_side = float(input("What is the length of the short side in cm?: "))
-                l_side = float(input("What is the length of the long side in cm?: "))
-                answer = s_side * l_side
-                print("The area of your rectangle is {} cm".format(answer))
-                return answer
-            elif s_area_perimeter == "perimeter":
-                s_side = float(input("What is the length of the short side in cm?: "))
-                l_side = float(input("What is the length of the long side in cm?: "))
-                answer = 2 * (s_side + l_side)
-                print("The perimeter of your rectangle is {} cm".format(answer))
-                return answer
-            else:
-                print("Please enter either area or perimeter")
+            small = float(input("What is the length of the small side in cm?: "))
+            large = float(input("What is the length of the large side in cm?: "))
+            r_area = small * large
+            r_perimeter = (small * 2) + (large * 2)
+            print("The area of your rectangle is {} cm".format(r_area))
+            print("The perimeter of your rectangle is {} cm".format(r_perimeter))
+            return r_area and r_perimeter
         except ValueError:
-            print()
+            print("Please enter a number")
 
 
 def parallelogram_calc():
     valid = False
     while valid is False:
         try:
-            question = input("Do you want to find the area or perimeter: ")
-            if question == "area":
-                base = float(input("What is the length of the base in cm?: "))
-                height = float(input("What is the height of the parallelogram in cm?: "))
-                answer = base * height
-                print("The area of your parallelogram is ", answer)
-                return answer
-            elif question == "perimeter":
-                base = float(input("What is the length of the base side in cm?: "))
-                height = float(input("What is the height of the parallelogram in cm?: "))
-                answer = 2 * (base + height)
-                print("The perimeter of your parallelogram is {} cm".format(answer))
-                return answer
-            else:
-                print("Please enter either area or perimeter")
+            base = int(input("What is the length of your base in cm?: "))
+            height = int(input("What is the height in cm?: "))
+            p_area = base * height
+            p_perimeter = 2 * (base + height)
+            print("The area of your parallelogram is {} cm".format(p_area))
+            print("The perimeter of your parallelogram is {} cm".format(p_perimeter))
+            return p_area and p_perimeter
         except ValueError:
-            print()
+            print("Please enter a number")
 
 
 def triangle_calc():
@@ -156,7 +126,7 @@ def triangle_calc():
             else:
                 print("Please enter yes or no")
         except ValueError:
-            print()
+            print("Please enter a number")
 
 
 # Initial variables
@@ -168,20 +138,21 @@ shape = [
     ["parallelogram", "p"],
     ["triangle", "t"]
 ]
-
 yes_no = [
     ["yes", "y"],
     ["no", "n"]
 ]
+history = []
 
 shape_valid = "invalid choice"
 while shape_valid == "invalid choice":
     question = input("Do you want to calculate a shape?: ").lower()
     shape_valid = string_check(question, yes_no)
+    print("You said:", shape_valid)
 
 if shape_valid == "Yes":
     shape_choice = ""
-    while shape_choice != "square" or "triangle" or "parallelogram" or "circle" or "rectangle":
+    while shape_choice != shape:
         shape_choice = input("What shape would you like to calculate? There is: \n"
                              "Square \n"
                              "Triangle \n"
@@ -189,55 +160,21 @@ if shape_valid == "Yes":
                              "Rectangle \n"
                              "Parallelogram \n"
                              "Type Here: ").lower()
-        print("Shape selected: ", shape_choice)
-        if shape_choice == "square":
-            square = square_calc()
-            break
-        if shape_choice == "rectangle":
-            rectangle = rectangle_calc()
-        if shape_choice == "circle":
-            circle = circle_calc()
-        if shape_choice == "parallelogram":
-            parallelogram = parallelogram_calc()
-        if shape_choice == "triangle":
-            triangle = triangle_calc()
-
         shape_choice = shape_choice.strip()
-
-        shape_choice = string_check(shape_choice, shape)
-
-# question == "square":
-
-# question == "circle":
-# circle = circle_calc()
-# break
-# question == "rectangle":
-# rectangle = rectangle_calc()
-# break
-# question == "parallelogram":
-# parallelogram = parallelogram_calc()
-# question == "triangle":
-# triangle = triangle_calc()
-
-# print("Please enter either square, circle, rectangle or parallelogram")
-
-
-# Square calculations:
-# Area is Side*Side
-# Perimeter is Side*4
-
-# This is due to all sides being the same size
-
-# Rectangle calculations:
-# Area is Side1*Side2 or Smaller_side*Larger_side
-# Perimeter is (Side1*2)+(Side2*2) or (Smaller_side*2)+(Larger_side*2)
-# Smaller/Larger side would be better in this case as there are 4 sides and the parallel sides are the same size
-
-# Triangle calculations:
-# Area is 1/2base*height
-# If 1 side is known and 2 angles is known use known side(sin (known angle)) use the answer of this and do ans/sin known angle
-    # Note known side and known angle have to be opposite of each other and the other angle is in the first half of the equation
-
-
-# For square roots use variable1 = math.sqrt(variable2)
-# For exponents use number/variable ** number/variable
+        chosen_shape = string_check(shape_choice, shape)
+        print("Shape selected: ", chosen_shape)
+        if shape_choice == "square" or shape_choice == "s":
+            square = square_calc()
+        elif shape_choice == "rectangle" or shape_choice == "r":
+            rectangle = rectangle_calc()
+        elif shape_choice == "circle" or shape_choice == "c":
+            circle = circle_calc()
+        elif shape_choice == "parallelogram" or shape_choice == "p":
+            parallelogram = parallelogram_calc()
+        elif shape_choice == "triangle" or shape_choice == "t":
+            triangle = triangle_calc()
+        else:
+            print()
+        if shape_valid != "invalid choice":
+            history.append(chosen_shape)
+            print(history)
