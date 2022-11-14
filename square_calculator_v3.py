@@ -21,13 +21,17 @@ def square_calc():
     valid = False
     while valid is False:
         try:
-            history_shape.insert("square")
             side = float(input("What is the length of one side in cm?: "))
             area = side * side
             perimeter = side * 4
-            print("The area of your square is {} cm".format(area))
-            print("The perimeter of your square is {} cm".format(perimeter))
-            return area and perimeter
+            history_shape.insert(0, chosen_shape)
+            history_length.insert(0, side)
+            history_width.insert(0, side)
+            history_area.insert(0, area)
+            history_perimeter.insert(0, perimeter)
+            dataframe = pandas.DataFrame(sr_shape_data)
+            print(dataframe)
+            return side
         except ValueError:
             print("Please enter a number")
 
@@ -36,12 +40,15 @@ def circle_calc():
     valid = False
     while valid is False:
         try:
-            decimal = int(input("How many decimal places do you want?: "))
             radius = float(input("Whats the radius of your circle in cm?: "))
             circumference = 2 * math.pi * radius
             c_area = math.pi * radius ** 2
-            print("The area of your circle is {:.{}f} cm".format(c_area, decimal))
-            print("The circumference of your circle is {:.{}f}".format(circumference, decimal))
+            history_circle.insert(0, chosen_shape)
+            history_radius.insert(0, radius)
+            history_circle_area.insert(0, c_area)
+            history_circumference.insert(0, circumference)
+            dataframe = pandas.DataFrame(c_shape_data)
+            print(dataframe)
             return c_area and circumference
         except ValueError:
             print("Please enter a number")
@@ -55,8 +62,13 @@ def rectangle_calc():
             large = float(input("What is the length of the large side in cm?: "))
             r_area = small * large
             r_perimeter = (small * 2) + (large * 2)
-            print("The area of your rectangle is {} cm".format(r_area))
-            print("The perimeter of your rectangle is {} cm".format(r_perimeter))
+            history_shape.insert(0, chosen_shape)
+            history_length.insert(0, small)
+            history_width.insert(0, large)
+            history_area.insert(0, r_area)
+            history_perimeter.insert(0, r_perimeter)
+            dataframe = pandas.DataFrame(sr_shape_data)
+            print(dataframe)
             return r_area and r_perimeter
         except ValueError:
             print("Please enter a number")
@@ -66,12 +78,17 @@ def parallelogram_calc():
     valid = False
     while valid is False:
         try:
-            base = int(input("What is the length of your base in cm?: "))
-            height = int(input("What is the height in cm?: "))
+            base = float(input("What is the length of your base in cm?: "))
+            height = float(input("What is the height in cm?: "))
             p_area = base * height
             p_perimeter = 2 * (base + height)
-            print("The area of your parallelogram is {} cm".format(p_area))
-            print("The perimeter of your parallelogram is {} cm".format(p_perimeter))
+            history_parallelogram.insert(0, chosen_shape)
+            history_base.insert(0, base)
+            history_height.insert(0, height)
+            history_parallelogram_area.insert(0, p_area)
+            history_parallelogram_perimeter.insert(0, p_perimeter)
+            dataframe = pandas.DataFrame(p_shape_data)
+            print(dataframe)
             return p_area and p_perimeter
         except ValueError:
             print("Please enter a number")
@@ -148,16 +165,38 @@ history_shape = []
 history_length = []
 history_width = []
 history_area = []
+history_base = []
+history_height = []
+history_radius = []
 history_perimeter = []
 history_circle_area = []
 history_circumference = []
+history_circle = []
+history_parallelogram = []
+history_parallelogram_area = []
+history_parallelogram_perimeter = []
 
-shape_data = {
+sr_shape_data = {
     'Shape': history_shape,
     'Length': history_length,
     'Width': history_width,
     'Area': history_area,
     'perimeter': history_perimeter
+}
+
+c_shape_data = {
+    'Shape': history_circle,
+    'Radius': history_radius,
+    'Area': history_circle_area,
+    'Circumference': history_circumference
+}
+
+p_shape_data = {
+    'Shape': history_parallelogram,
+    'Base': history_base,
+    'Height': history_height,
+    'Area': history_parallelogram_area,
+    'perimeter': history_parallelogram_perimeter
 }
 
 shape_valid = "invalid choice"
@@ -184,13 +223,14 @@ if shape_valid == "Yes":
         print("Shape selected: ", chosen_shape)
         if shape_choice == "square" or shape_choice == "s":
             square = square_calc()
-            print(square)
+
         elif shape_choice == "rectangle" or shape_choice == "r":
             rectangle = rectangle_calc()
         elif shape_choice == "circle" or shape_choice == "c":
             circle = circle_calc()
         elif shape_choice == "parallelogram" or shape_choice == "p":
             parallelogram = parallelogram_calc()
+
         elif shape_choice == "triangle" or shape_choice == "t":
             triangle = triangle_calc()
         else:
