@@ -21,7 +21,7 @@ def square_calc():
             else:
                 print("Please enter either area or perimeter")
         except ValueError:
-            print()
+            print("Please enter a number")
 
 
 def circle_calc():
@@ -32,18 +32,18 @@ def circle_calc():
             decimal_place = int(input("How many decimal places do you want?: "))
             if question == "area":
                 radius = float(input("What is the radius of your circle in cm?: "))
-                answer = 2 * math.pi * radius
+                answer = math.pi * radius ** 2
                 print("The area of your circle is {:.{}f}".format(answer, decimal_place))
                 return answer
             elif question == "circumference":
                 radius = float(input("What is the radius of your circle in cm?: "))
-                answer = math.pi * radius ** 2
+                answer = 2 * math.pi * radius
                 print("The circumference of your circle is {:.{}f} cm".format(answer, decimal_place))
                 return answer
             else:
                 print("Please enter either area or circumference")
         except ValueError:
-            print()
+            print("Please enter a number")
 
 
 def rectangle_calc():
@@ -81,15 +81,15 @@ def parallelogram_calc():
                 print("The area of your parallelogram is ", answer)
                 return answer
             elif question == "perimeter":
-                base = float(input("What is the length of the base side in cm?: "))
-                height = float(input("What is the height of the parallelogram in cm?: "))
-                answer = 2 * (base + height)
+                base = float(input("What is the length of the base in cm?: "))
+                side = float(input("What is the length of the side in cm?: "))
+                answer = 2 * (base + side)
                 print("The perimeter of your parallelogram is {} cm".format(answer))
                 return answer
             else:
                 print("Please enter either area or perimeter")
         except ValueError:
-            print()
+            print("Please enter a number")
 
 
 def triangle_calc():
@@ -105,14 +105,14 @@ def triangle_calc():
             #
                     # This section uses Pythagoras theorem as there are 2 sides and the user needs the 3rd side
                     if question3 == "yes":
-                        hypotenuse = input("What is the length of the hypotenuse in cm?: ")
-                        opposite = input("What is the length of the opposite in cm?: ")
+                        hypotenuse = float(input("What is the length of the hypotenuse in cm?: "))
+                        opposite = float(input("What is the length of the opposite in cm?: "))
                         adjacent = (hypotenuse**2) - (opposite**2)
                         answer = math.sqrt(adjacent)
                         print("The length of the adjacent is {} cm".format(answer))
                     else:
-                        opposite = input("What is the length of the opposite in cm?: ")
-                        adjacent = input("What is the length of the adjacent in cm?: ")
+                        opposite = float(input("What is the length of the opposite in cm?: "))
+                        adjacent = float(input("What is the length of the adjacent in cm?: "))
                         hypotenuse = (opposite**2) + (adjacent**2)
                         answer = math.sqrt(hypotenuse)
                         print("The length of the hypotenuse is {} cm".format(answer))
@@ -168,7 +168,7 @@ while valid is False:
         elif question == "triangle":
             triangle = triangle_calc()
         else:
-            print("Please enter either square, circle, rectangle or parallelogram")
+            print("Please enter either square, circle, rectangle, parallelogram or triangle")
     except ValueError:
         print()
 

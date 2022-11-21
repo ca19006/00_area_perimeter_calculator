@@ -21,7 +21,6 @@ def square_calc():
     valid = False
     while valid is False:
         try:
-            history_shape.insert("square")
             side = float(input("What is the length of one side in cm?: "))
             area = side * side
             perimeter = side * 4
@@ -66,10 +65,11 @@ def parallelogram_calc():
     valid = False
     while valid is False:
         try:
+            side = int(input("What is the length of your side in cm?: "))
             base = int(input("What is the length of your base in cm?: "))
             height = int(input("What is the height in cm?: "))
             p_area = base * height
-            p_perimeter = 2 * (base + height)
+            p_perimeter = 2 * (base + side)
             print("The area of your parallelogram is {} cm".format(p_area))
             print("The perimeter of your parallelogram is {} cm".format(p_perimeter))
             return p_area and p_perimeter
@@ -144,21 +144,6 @@ yes_no = [
     ["yes", "y"],
     ["no", "n"]
 ]
-history_shape = []
-history_length = []
-history_width = []
-history_area = []
-history_perimeter = []
-history_circle_area = []
-history_circumference = []
-
-shape_data = {
-    'Shape': history_shape,
-    'Length': history_length,
-    'Width': history_width,
-    'Area': history_area,
-    'perimeter': history_perimeter
-}
 
 shape_valid = "invalid choice"
 while shape_valid == "invalid choice":
@@ -184,7 +169,6 @@ if shape_valid == "Yes":
         print("Shape selected: ", chosen_shape)
         if shape_choice == "square" or shape_choice == "s":
             square = square_calc()
-            print(square)
         elif shape_choice == "rectangle" or shape_choice == "r":
             rectangle = rectangle_calc()
         elif shape_choice == "circle" or shape_choice == "c":
